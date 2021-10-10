@@ -38,8 +38,8 @@ public class PlayScreen implements Screen {
     private List<String> oldMessages;
 
     public PlayScreen() {
-        this.screenWidth = 80;
-        this.screenHeight = 24;
+        this.screenWidth = 30;
+        this.screenHeight = 30;
         createWorld();
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
@@ -57,7 +57,7 @@ public class PlayScreen implements Screen {
     }
 
     private void createWorld() {
-        world = new WorldBuilder(90, 31).makeCaves().build();
+        world = new WorldBuilder(30, 30).makeCaves().build();
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
