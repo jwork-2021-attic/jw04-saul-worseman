@@ -10,11 +10,10 @@ public class MazeGenerator {
     private char[][] grid; // output grid
     private Cell[][] cells; // 2d array of Cells
     private Random random = new Random(); // The random object
-
     // initialize with x and y the same
     public MazeGenerator(int aDimension) {
         // Initialize
-        this(aDimension, aDimension);
+        this(aDimension , aDimension );
     }
     // constructor
     public MazeGenerator(int xDimension, int yDimension) {
@@ -56,6 +55,8 @@ public class MazeGenerator {
         boolean wall = true;
         // if true, has yet to be used in generation
         boolean open = true;
+
+        public boolean isWall(){return wall;}
         // construct Cell at x, y
         Cell(int x, int y) {
             this(x, y, true);
@@ -103,7 +104,7 @@ public class MazeGenerator {
         }
     }
     // generate from upper left (In computing the y increases down often)
-    public void generateMaze() {
+    private void generateMaze() {
         generateMaze(0, 0);
     }
     // generate the maze from coordinates x, y
@@ -158,7 +159,7 @@ public class MazeGenerator {
         }
     }
 
-    public char[][] getRawMaze(){return grid;}
+
     public void solve() {
         // default solve top left to bottom right
         this.solve(0, 0, dimensionX - 1, dimensionY -1);
@@ -309,5 +310,7 @@ public class MazeGenerator {
         return output;
     }
 
-
+    public char[][] getRawMaze(){
+       return grid;
+    }
 }

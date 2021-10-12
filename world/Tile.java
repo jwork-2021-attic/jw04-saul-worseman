@@ -30,7 +30,9 @@ public enum Tile {
 
     WALL((char) 177, AsciiPanel.brightBlack),
 
-    BOUNDS('x', AsciiPanel.magenta);
+    BOUNDS('x', AsciiPanel.magenta),
+
+    PATH((char) 188, AsciiPanel.blue);
 
     private char glyph;
 

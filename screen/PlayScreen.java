@@ -29,7 +29,7 @@ import java.util.List;
  * @author Aeranythe Echosong
  */
 public class PlayScreen implements Screen {
-    public final  int DIM = 30;
+    public final  static int DIM = 29;
     private World world;
     private Creature player;
     private int screenWidth;
@@ -57,7 +57,7 @@ public class PlayScreen implements Screen {
     }
 
     private void createWorld() {
-        world = new WorldBuilder(30).makeCaves().build();
+        world = new WorldBuilder(DIM).makeCaves().build();
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
@@ -66,8 +66,8 @@ public class PlayScreen implements Screen {
             for (int y = 0; y < DIM; y++) {
                 int wx = x + left;
                 int wy = y + top;
-                //Take care! The x, y here is not matrix's width or height;
-                terminal.write(world.glyph(wx, wy), y, x, world.color(wx, wy));
+                //Take care! The x, y here is not that matrix's width or height;
+                terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
             }
         }
 //        // Show creatures
