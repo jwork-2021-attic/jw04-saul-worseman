@@ -29,7 +29,7 @@ import java.util.List;
  * @author Aeranythe Echosong
  */
 public class PlayScreen implements Screen {
-
+    public final  int DIM = 30;
     private World world;
     private Creature player;
     private int screenWidth;
@@ -38,8 +38,8 @@ public class PlayScreen implements Screen {
     private List<String> oldMessages;
 
     public PlayScreen() {
-        this.screenWidth = 30;
-        this.screenHeight = 30;
+        this.screenWidth = DIM;
+        this.screenHeight = DIM;
         createWorld();
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
@@ -57,33 +57,29 @@ public class PlayScreen implements Screen {
     }
 
     private void createWorld() {
-        world = new WorldBuilder(30, 30).makeCaves().build();
+        world = new WorldBuilder(30).makeCaves().build();
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
         // Show terrain
-        for (int x = 0; x < screenWidth; x++) {
-            for (int y = 0; y < screenHeight; y++) {
+        for (int x = 0; x < DIM; x++) {
+            for (int y = 0; y < DIM; y++) {
                 int wx = x + left;
                 int wy = y + top;
-
-                if (player.canSee(wx, wy)) {
-                    terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
-                } else {
-                    terminal.write(world.glyph(wx, wy), x, y, Color.DARK_GRAY);
-                }
+                //Take care! The x, y here is not matrix's width or height;
+                terminal.write(world.glyph(wx, wy), y, x, world.color(wx, wy));
             }
         }
-        // Show creatures
-        for (Creature creature : world.getCreatures()) {
-            if (creature.x() >= left && creature.x() < left + screenWidth && creature.y() >= top
-                    && creature.y() < top + screenHeight) {
-                if (player.canSee(creature.x(), creature.y())) {
-                    terminal.write(creature.glyph(), creature.x() - left, creature.y() - top, creature.color());
-                }
-            }
-        }
-        // Creatures can choose their next action now
+//        // Show creatures
+//        for (Creature creature : world.getCreatures()) {
+//            if (creature.x() >= left && creature.x() < left + screenWidth && creature.y() >= top
+//                    && creature.y() < top + screenHeight) {
+//                if (player.canSee(creature.x(), creature.y())) {
+//                    terminal.write(creature.glyph(), creature.x() - left, creature.y() - top, creature.color());
+//                }
+//            }
+//        }
+//        // Creatures can choose their next action now
         world.update();
     }
 
