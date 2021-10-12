@@ -1,10 +1,9 @@
 package maze;
 public class Main {
+    // run it
     public static void main(String[] args) {
-        MazeGenerator mazeGenerator = new MazeGenerator(30);
-        mazeGenerator.generateMaze();
-
-        System.out.println("RAW MAZE\n" + mazeGenerator.getRawMaze());
-        System.out.println("SYMBOLIC MAZE\n" + mazeGenerator.getSymbolicMaze());
+        MazeGenerator maze = new MazeGenerator(20);
+        maze.solve();
+        maze.draw();
     }
 }

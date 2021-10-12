@@ -28,15 +28,15 @@ public class WorldBuilder {
     private int row;
     private Tile[][] tiles;
     private MazeGenerator mazeGenerator;
-    private int maze[][];
+    private char maze[][];
     public WorldBuilder(int dim) {
         this.col = dim;
         this.row = dim;
-        this.tiles = new Tile[col][row];
+        this.tiles = new Tile[row][col];
         mazeGenerator = new MazeGenerator(30);
         mazeGenerator.generateMaze();
-        System.out.println(mazeGenerator.getRawMaze());
-        maze = mazeGenerator.getArrayMaze();
+        //System.out.println(mazeGenerator.getRawMaze());
+        maze = mazeGenerator.getRawMaze();
     }
 
     public World build() {
@@ -46,15 +46,11 @@ public class WorldBuilder {
     private WorldBuilder randomizeTiles() {
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                //Random rand = new Random();
-                switch (maze[i][j]) {
-                    case 0:
-                        tiles[i][j] = Tile.FLOOR;
-                        break;
-                    case 1:
-                        tiles[i][j] = Tile.WALL;
-                        break;
-                }
+                if (Character.compare(maze[i][j],'X') == 0)
+                    tiles[i][j] = Tile.WALL;
+
+                else
+                    tiles[i][j] = Tile.FLOOR;
             }
         }
         return this;
