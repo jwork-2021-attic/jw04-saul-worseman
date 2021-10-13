@@ -28,23 +28,21 @@ public class WorldBuilder {
     private int col;
     private int row;
     private Tile[][] tiles;
-    //private MazeGenerator mazeGenerator ;
-    private char[][] maze;
     public WorldBuilder(int dim) {
         this.col = dim;
         this.row = dim;
         this.tiles = new Tile[row][col];
-        MazeGenerator mazeGenerator = new MazeGenerator(14);
-        mazeGenerator.solve();
-        mazeGenerator.draw();
-        maze = mazeGenerator.getRawMaze();
     }
 
     public World build() {
         return new World(tiles);
     }
 
-    private WorldBuilder randomizeTiles() {
+    public WorldBuilder SetTiles() {
+        MazeGenerator mazeGenerator = new MazeGenerator(14);
+        //mazeGenerator.solve();
+        mazeGenerator.draw();
+        char[][]maze = mazeGenerator.getRawMaze();
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
                 if (maze[i * 2][j] == 'X') {
@@ -61,8 +59,4 @@ public class WorldBuilder {
         return this;
     }
 
-
-    public WorldBuilder makeCaves() {
-        return randomizeTiles();
-    }
 }

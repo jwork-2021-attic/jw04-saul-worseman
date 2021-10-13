@@ -57,7 +57,7 @@ public class PlayScreen implements Screen {
     }
 
     private void createWorld() {
-        world = new WorldBuilder(DIM).makeCaves().build();
+        world = new WorldBuilder(DIM).SetTiles().build();
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
