@@ -29,66 +29,49 @@ import java.util.List;
  * @author Aeranythe Echosong
  */
 public class PlayScreen implements Screen {
-    public final  static int DIM = 29;
+    public final static int DIM = 29;
     private World world;
     private Creature player;
     private int screenWidth;
     private int screenHeight;
-    private List<String> messages;
-    private List<String> oldMessages;
 
     public PlayScreen() {
         this.screenWidth = DIM;
         this.screenHeight = DIM;
         createWorld();
         createPlayer();
-        this.messages = new ArrayList<String>();
-        this.oldMessages = new ArrayList<String>();
-
     }
 
     private void createPlayer() {
         this.player = Player.getPlayer();
         player.setWorld(world);
         new PlayerAI(player);
-
-
     }
 
     private void createWorld() {
         world = new WorldBuilder(DIM).setTiles().build();
     }
 
-    private void displayTiles(AsciiPanel terminal, int left, int top) {
+    private void displayTiles(AsciiPanel terminal) {
         // Show terrain
         for (int x = 0; x < DIM; x++) {
             for (int y = 0; y < DIM; y++) {
-                int wx = x + left;
-                int wy = y + top;
+                int wx = x;
+                int wy = y;
                 //Take care! The x, y here is not that matrix's width or height;
                 terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
             }
         }
-        world.update();
     }
 
-    private void displayMessages(AsciiPanel terminal, List<String> messages) {
-        int top = this.screenHeight - messages.size();
-        for (int i = 0; i < messages.size(); i++) {
-            terminal.write(messages.get(i), 1, top + i + 1);
-        }
-        this.oldMessages.addAll(messages);
-        messages.clear();
-    }
 
     @Override
     public void displayOutput(AsciiPanel terminal) {
         // Terrain and creatures
-        displayTiles(terminal, getScrollX(), getScrollY());
+        displayTiles(terminal);
         // Player
-        terminal.write(player.glyph(), player.x() - getScrollX(), player.y() - getScrollY(), player.color());
+        terminal.write(player.glyph(), player.x() , player.y() , player.color());
         // Messages
-        displayMessages(terminal, this.messages);
     }
 
     @Override
@@ -106,16 +89,12 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_DOWN:
                 player.moveBy(0, 1);
                 break;
+            case KeyEvent.VK_ENTER:
+                player.route();
+                break;
         }
         return this;
     }
 
-    public int getScrollX() {
-        return Math.max(0, Math.min(player.x() - screenWidth / 2, world.width() - screenWidth));
-    }
-
-    public int getScrollY() {
-        return Math.max(0, Math.min(player.y() - screenHeight / 2, world.height() - screenHeight));
-    }
 
 }

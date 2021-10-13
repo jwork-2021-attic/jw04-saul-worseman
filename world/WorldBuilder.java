@@ -56,6 +56,8 @@ public class WorldBuilder {
                 }
             }
         }
+        tiles[1][1] = Tile.SRC;
+        tiles[27][27] = Tile.DST;
         return this;
     }
 

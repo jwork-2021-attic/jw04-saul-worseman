@@ -7,7 +7,7 @@ import java.util.Random;
 public class MazeGenerator {
     private int dimensionX, dimensionY; // dimension of maze
     private int gridDimensionX, gridDimensionY; // dimension of output grid
-    private char[][] grid; // output grid
+    public char[][] grid; // output grid
     private Cell[][] cells; // 2d array of Cells
     private Random random = new Random(); // The random object
     // initialize with x and y the same
@@ -37,7 +37,7 @@ public class MazeGenerator {
     }
 
     // inner class to represent a cell
-    private class Cell {
+    private static class Cell {
         int x, y; // coordinates
         // cells this cell is connected to
         ArrayList<Cell> neighbors = new ArrayList<>();

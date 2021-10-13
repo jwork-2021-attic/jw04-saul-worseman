@@ -25,14 +25,31 @@ import java.util.List;
  */
 public class PlayerAI extends CreatureAI {
 
+    private boolean[][] memory;
     public PlayerAI(Creature creature) {
         super(creature);
+        memory = new boolean[creature.world.width()][creature.world.height()];
+        memory[1][1] = true;
     }
 
     public void onEnter(int x, int y, Tile tile) {
         if (tile.isGround()) {
             creature.setX(x);
             creature.setY(y);
+            creature.world.setTile(x,y, Tile.VISITED) ;
+        }
+    }
+
+    public void route(){
+        int[][] directions = {{0, 1},{0, -1},{1, 0},{-1, 0}};
+        for(int i = 0; i < 4; i++){
+            int tempX = creature.x() + directions[i][0];
+            int tempY = creature.y() + directions[i][1];
+            if(creature.world.tile(tempX, tempY) == Tile.PATH && !memory[tempX][tempY]){
+                onEnter(tempX, tempY, creature.world.tile(tempX, tempY));
+                memory[tempX][tempY] = true;
+                break;
+            }
         }
     }
 }

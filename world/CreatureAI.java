@@ -37,4 +37,8 @@ class CreatureAI {
 
     public void onUpdate() {
     }
+
+    public void route(){
+    }
+
 }

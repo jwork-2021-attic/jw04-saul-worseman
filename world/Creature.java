@@ -25,7 +25,7 @@ import java.awt.Color;
  */
 public class Creature {
 
-    private World world;
+    protected World world;
 
     private int x;
 
@@ -69,6 +69,10 @@ public class Creature {
         ai.onEnter(x + mx, y + my, world.tile(x + mx, y + my));
     }
 
+    public void route(){
+        ai.route();
+    }
+
 
     public void update() {
         this.ai.onUpdate();
@@ -83,4 +87,5 @@ public class Creature {
     public void setWorld(World world) {
         this.world = world;
     }
+
 }

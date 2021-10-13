@@ -35,8 +35,6 @@ public class Player extends Creature {
         setY(1);
     }
 
-
-
     public static Player getPlayer(){
         return player;
     }

@@ -1,5 +1,6 @@
 package world;
 
+import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 import java.awt.Color;
 /*
@@ -32,9 +33,16 @@ public enum Tile {
 
     BOUNDS('x', AsciiPanel.magenta),
 
-    PATH((char) 249, AsciiPanel.blue);
+    PATH((char) 250, AsciiPanel.green),
+
+    SRC((char) 240, AsciiPanel.red),
+
+    DST((char) 241, AsciiPanel.cyan),
+
+    VISITED((char) 250, AsciiPanel.blue);
 
     private char glyph;
+
 
     public char glyph() {
         return glyph;
@@ -46,10 +54,6 @@ public enum Tile {
         return color;
     }
 
-    public boolean isDiggable() {
-        return this != Tile.WALL;
-    }
-
     public boolean isGround() {
         return this != Tile.WALL && this != Tile.BOUNDS;
     }
@@ -58,4 +62,5 @@ public enum Tile {
         this.glyph = glyph;
         this.color = color;
     }
+
 }
