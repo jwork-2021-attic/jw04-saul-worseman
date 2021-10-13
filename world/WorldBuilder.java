@@ -38,7 +38,7 @@ public class WorldBuilder {
         return new World(tiles);
     }
 
-    public WorldBuilder SetTiles() {
+    public WorldBuilder setTiles() {
         MazeGenerator mazeGenerator = new MazeGenerator(14);
         //mazeGenerator.solve();
         mazeGenerator.draw();

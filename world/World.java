@@ -65,11 +65,6 @@ public class World {
         return height;
     }
 
-    public void dig(int x, int y) {
-        if (tile(x, y).isDiggable()) {
-            tiles[x][y] = Tile.FLOOR;
-        }
-    }
 
     public void addAtEmptyLocation(Creature creature) {
         int x;
@@ -97,10 +92,6 @@ public class World {
 
     public List<Creature> getCreatures() {
         return this.creatures;
-    }
-
-    public void remove(Creature target) {
-        this.creatures.remove(target);
     }
 
     public void update() {

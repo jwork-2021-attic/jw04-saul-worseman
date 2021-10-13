@@ -36,12 +36,6 @@ public class PlayerAI extends CreatureAI {
         if (tile.isGround()) {
             creature.setX(x);
             creature.setY(y);
-        } else if (tile.isDiggable()) {
-            creature.dig(x, y);
         }
-    }
-
-    public void onNotify(String message) {
-        this.messages.add(message);
     }
 }

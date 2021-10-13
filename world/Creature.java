@@ -65,75 +65,16 @@ public class Creature {
         this.ai = ai;
     }
 
-    private int maxHP;
 
-    public int maxHP() {
-        return this.maxHP;
-    }
-
-    private int hp;
-
-    public int hp() {
-        return this.hp;
-    }
-
-    public void modifyHP(int amount) {
-        this.hp += amount;
-
-        if (this.hp < 1) {
-            world.remove(this);
-        }
-    }
-
-    private int attackValue;
-
-    public int attackValue() {
-        return this.attackValue;
-    }
-
-    private int defenseValue;
-
-    public int defenseValue() {
-        return this.defenseValue;
-    }
-
-    private int visionRadius;
-
-    public int visionRadius() {
-        return this.visionRadius;
-    }
-
-    public boolean canSee(int wx, int wy) {
-        return ai.canSee(wx, wy);
-    }
-
-    public Tile tile(int wx, int wy) {
-        return world.tile(wx, wy);
-    }
-
-    public void dig(int wx, int wy) {
-        world.dig(wx, wy);
-    }
 
     public void moveBy(int mx, int my) {
         Creature other = world.creature(x + mx, y + my);
 
         if (other == null) {
             ai.onEnter(x + mx, y + my, world.tile(x + mx, y + my));
-        } else {
-            attack(other);
         }
     }
 
-    public void attack(Creature other) {
-        int damage = Math.max(0, this.attackValue() - other.defenseValue());
-        damage = (int) (Math.random() * damage) + 1;
-
-        other.modifyHP(-damage);
-
-        this.notify("You attack the '%s' for %d damage.", other.glyph, damage);
-        other.notify("The '%s' attacks you for %d damage.", glyph, damage);
-    }
 
     public void update() {
         this.ai.onUpdate();
@@ -147,14 +88,9 @@ public class Creature {
         ai.onNotify(String.format(message, params));
     }
 
-    public Creature(World world, char glyph, Color color, int maxHP, int attack, int defense, int visionRadius) {
+    public Creature(World world, char glyph, Color color) {
         this.world = world;
         this.glyph = glyph;
         this.color = color;
-        this.maxHP = maxHP;
-        this.hp = maxHP;
-        this.attackValue = attack;
-        this.defenseValue = defense;
-        this.visionRadius = visionRadius;
     }
 }
