@@ -25,11 +25,8 @@ import java.util.List;
  */
 public class PlayerAI extends CreatureAI {
 
-    private List<String> messages;
-
-    public PlayerAI(Creature creature, List<String> messages) {
+    public PlayerAI(Creature creature) {
         super(creature);
-        this.messages = messages;
     }
 
     public void onEnter(int x, int y, Tile tile) {

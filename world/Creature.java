@@ -65,14 +65,8 @@ public class Creature {
         this.ai = ai;
     }
 
-
-
     public void moveBy(int mx, int my) {
-        Creature other = world.creature(x + mx, y + my);
-
-        if (other == null) {
-            ai.onEnter(x + mx, y + my, world.tile(x + mx, y + my));
-        }
+        ai.onEnter(x + mx, y + my, world.tile(x + mx, y + my));
     }
 
 
@@ -80,17 +74,13 @@ public class Creature {
         this.ai.onUpdate();
     }
 
-    public boolean canEnter(int x, int y) {
-        return world.tile(x, y).isGround();
-    }
 
-    public void notify(String message, Object... params) {
-        ai.onNotify(String.format(message, params));
-    }
-
-    public Creature(World world, char glyph, Color color) {
-        this.world = world;
+    public Creature( char glyph, Color color) {
         this.glyph = glyph;
         this.color = color;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
     }
 }

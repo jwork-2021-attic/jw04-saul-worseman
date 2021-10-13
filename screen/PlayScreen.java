@@ -41,15 +41,16 @@ public class PlayScreen implements Screen {
         this.screenWidth = DIM;
         this.screenHeight = DIM;
         createWorld();
+        createPlayer();
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
 
-        CreatureFactory creatureFactory = new CreatureFactory(this.world);
-        createCreatures(creatureFactory);
     }
 
-    private void createCreatures(CreatureFactory creatureFactory) {
-        this.player = creatureFactory.newPlayer(this.messages);
+    private void createPlayer() {
+        this.player = Player.getPlayer();
+        player.setWorld(world);
+        new PlayerAI(player);
 
 
     }
@@ -68,15 +69,6 @@ public class PlayScreen implements Screen {
                 terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
             }
         }
-        // Show creatures
-        for (Creature creature : world.getCreatures()) {
-            if (creature.x() >= left && creature.x() < left + screenWidth && creature.y() >= top
-                    && creature.y() < top + screenHeight) {
-                terminal.write(creature.glyph(), creature.x() - left, creature.y() - top, creature.color());
-
-            }
-        }
-        // Creatures can choose their next action now
         world.update();
     }
 

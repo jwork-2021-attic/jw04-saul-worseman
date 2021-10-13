@@ -94,6 +94,10 @@ public class World {
         return this.creatures;
     }
 
+    public void remove(Creature target) {
+        this.creatures.remove(target);
+    }
+
     public void update() {
         ArrayList<Creature> toUpdate = new ArrayList<>(this.creatures);
 

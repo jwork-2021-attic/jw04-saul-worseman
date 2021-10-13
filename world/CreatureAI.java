@@ -37,7 +37,4 @@ class CreatureAI {
 
     public void onUpdate() {
     }
-
-    public void onNotify(String message) {
-    }
 }

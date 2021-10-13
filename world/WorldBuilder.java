@@ -40,7 +40,7 @@ public class WorldBuilder {
 
     public WorldBuilder setTiles() {
         MazeGenerator mazeGenerator = new MazeGenerator(14);
-        //mazeGenerator.solve();
+        mazeGenerator.solve();
         mazeGenerator.draw();
         char[][]maze = mazeGenerator.getRawMaze();
         for (int i = 0; i < this.row; i++) {

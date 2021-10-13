@@ -25,18 +25,20 @@ import asciiPanel.AsciiPanel;
  *
  * @author Aeranythe Echosong
  */
-public class CreatureFactory {
+public class Player extends Creature {
 
-    private World world;
+    private static Player player = new Player();
 
-    public CreatureFactory(World world) {
-        this.world = world;
+    private Player(){
+        super((char)2, AsciiPanel.brightWhite);
+        setX(1);
+        setY(1);
     }
 
-    public Creature newPlayer(List<String> messages) {
-        Creature player = new Creature(this.world, (char)2, AsciiPanel.brightWhite);
-        world.addAtEmptyLocation(player);
-        new PlayerAI(player, messages);
+
+
+    public static Player getPlayer(){
         return player;
     }
+
 }
