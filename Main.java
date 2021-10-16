@@ -12,7 +12,7 @@ import com.anish.screen.WorldScreen;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
 
-public class Main extends JFrame implements KeyListener {
+public class Main extends JFrame{
 
     private AsciiPanel terminal;
     private Screen screen;
@@ -23,7 +23,23 @@ public class Main extends JFrame implements KeyListener {
         add(terminal);
         pack();
         screen = new WorldScreen();
-        addKeyListener(this);
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                screen = screen.respondToUserInput(e);
+                repaint();
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
         repaint();
 
     }
@@ -33,22 +49,6 @@ public class Main extends JFrame implements KeyListener {
         terminal.clear();
         screen.displayOutput(terminal);
         super.repaint();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        screen = screen.respondToUserInput(e);
-        repaint();
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 
     public static void main(String[] args) {
