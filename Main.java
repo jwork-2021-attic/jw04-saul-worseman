@@ -1,5 +1,6 @@
 
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -23,21 +24,29 @@ public class Main extends JFrame{
         add(terminal);
         pack();
         screen = new WorldScreen();
-        addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
+//        addKeyListener(new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                screen = screen.respondToUserInput(e);
+//                repaint();
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//
+//            }
+//        });
+        addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
                 screen = screen.respondToUserInput(e);
                 repaint();
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
             }
         });
         repaint();
