@@ -1,17 +1,16 @@
 
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
 
+import Lambda.MyInterface;
 import com.anish.monsters.World;
 import com.anish.screen.Screen;
 import com.anish.screen.WorldScreen;
-
+import Lambda.MyInterface;
 import asciiPanel.AsciiFont;
 import asciiPanel.AsciiPanel;
+
+import java.awt.event.KeyListener;
 
 public class Main extends JFrame{
 
@@ -41,18 +40,33 @@ public class Main extends JFrame{
 //
 //            }
 //        });
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                screen = screen.respondToUserInput(e);
-                repaint();
-            }
+
+//       inner class
+//        addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                screen = screen.respondToUserInput(e);
+//                repaint();
+//            }
+//        });
+
+//      lambda 1
+//        MyInterface myInterface = e->{
+//            screen = screen.respondToUserInput(e);
+//            repaint();
+//        };
+//        addKeyListener(myInterface);
+
+        addMyInterface(e -> {
+            screen = screen.respondToUserInput(e);
+            repaint();
         });
         repaint();
-
     }
 
+    public synchronized void addMyInterface(MyInterface l){
+        addKeyListener(l);
+    }
     @Override
     public void repaint() {
         terminal.clear();
